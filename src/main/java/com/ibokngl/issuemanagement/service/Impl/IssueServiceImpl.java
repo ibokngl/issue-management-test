@@ -28,7 +28,7 @@ public class IssueServiceImpl implements IssueService {
     @Override
     public IssueDto save(IssueDto issue) {
         if (issue.getDate()==null)
-            throw new IllegalArgumentException("Issue Date cannor be null");
+            throw new IllegalArgumentException("Issue Date cannot be null");
 
         Issue issueDb = modelMapper.map(issue,Issue.class);
         issueDb = issueRepository.save(issueDb);
@@ -37,7 +37,8 @@ public class IssueServiceImpl implements IssueService {
 
     @Override
     public IssueDto getById(Long Id) {
-        return null;
+        Issue issue = issueRepository.getOne(Id);
+        return modelMapper.map(issue, IssueDto.class);
     }
 
     @Override

@@ -1,8 +1,6 @@
 package com.ibokngl.issuemanagement.service.Impl;
 
-import com.ibokngl.issuemanagement.dto.IssueDto;
 import com.ibokngl.issuemanagement.dto.ProjectDto;
-import com.ibokngl.issuemanagement.entity.Issue;
 import com.ibokngl.issuemanagement.entity.Project;
 import com.ibokngl.issuemanagement.repository.ProjectRepository;
 import com.ibokngl.issuemanagement.service.ProjectService;
@@ -59,11 +57,10 @@ public class ProjectServiceImpl implements ProjectService {
 
     @Override
     public Tpage<ProjectDto> getAllPageable(Pageable pageable) {
-        Page<Project> data=projectRepository.findAll(pageable);
-        Tpage page=new Tpage<ProjectDto>();
-        ProjectDto[] dtos=modelMapper.map(data.getContent(),ProjectDto[].class);
-        page.setStat(data, Arrays.asList(dtos));
-        return page;
+        Page<Project> data = projectRepository.findAll(pageable);
+        Tpage<ProjectDto> respnose = new Tpage<ProjectDto>();
+        respnose.setStat(data, Arrays.asList(modelMapper.map(data.getContent(), ProjectDto[].class)));
+        return respnose;
     }
 
     @Override
